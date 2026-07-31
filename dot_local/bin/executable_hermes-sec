@@ -1,0 +1,63 @@
+#!/bin/bash
+# hermes-sec — Launch Hermes with secrets injected from Infisical
+#
+# Usage:
+#   hermes-sec          # launches hermes desktop with dev secrets (no approval)
+#   hermes-sec --prod   # launches with prod secrets (requires approval gate)
+#   hermes-sec --cli    # launches hermes CLI instead of desktop
+#
+# Requirements:
+#   - infisical CLI installed and logged in (`infisical login`)
+#   - Infisical project set up with environments: dev, prod
+#
+# Secret mapping (stored in Infisical, NOT in .env):
+#   HERMES_CUSTOM_API_AIAND_COM_API_KEY   → provider API key
+#   SUDO_PASSWORD                         → local sudo access
+#   EXA_API_KEY                           → Exa web search
+#
+# Non-secret config (terminal backend, browser settings, etc.) stays in .env
+
+set -euo pipefail
+
+INFISICAL_PROJECT_ID=""  # Set this after creating your Infisical project
+INFISICAL_ORG_ID=""      # Set this after creating your Infisical org
+
+# Parse args
+ENV="dev"
+SURFACE="desktop"
+for arg in "$@"; do
+  case "$arg" in
+    --prod) ENV="prod" ;;
+    --cli)  SURFACE="cli" ;;
+    --help|-h)
+      echo "Usage: hermes-sec [--prod] [--cli]"
+      echo "  --prod  Use prod environment (approval-gated secrets)"
+      echo "  --cli   Launch CLI instead of desktop app"
+      exit 0
+      ;;
+  esac
+done
+
+# Check Infisical is set up
+if ! command -v infisical &>/dev/null; then
+  echo "ERROR: infisical CLI not found. Install with: npm install -g @infisical/cli"
+  exit 1
+fi
+
+if [ -z "$INFISICAL_PROJECT_ID" ] || [ -z "$INFISICAL_ORG_ID" ]; then
+  echo "ERROR: Set INFISICAL_PROJECT_ID and INFISICAL_ORG_ID in this script."
+  echo ""
+  echo "After logging in and creating a project, run:"
+  echo "  infisical projects list"
+  echo "  infisical orgs list"
+  echo "Then edit: $(readlink -f "$0")"
+  exit 1
+fi
+
+# Launch Hermes with secrets injected from Infisical
+# Non-secret env vars from .env are still loaded by Hermes normally
+if [ "$SURFACE" = "cli" ]; then
+  exec infisical run --projectId="$INFISICAL_PROJECT_ID" --env="$ENV" -- hermes
+else
+  exec infisical run --projectId="$INFISICAL_PROJECT_ID" --env="$INFISICAL_ORG_ID" --env="$ENV" -- hermes desktop
+fi

@@ -1,0 +1,13 @@
+anydesk-bin
+freerdp2
+google-chrome
+guacamole-client-bin
+guacamole-server
+icamerasrc-git
+intel-ipu6-camera-bin
+intel-ipu6-camera-hal-git
+intel-ipu6-dkms-git
+larksuite-bin
+libtelnet
+rtk-bin
+v4l2-relayd
