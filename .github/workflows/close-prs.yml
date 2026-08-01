@@ -1,0 +1,35 @@
+name: Close Pull Requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo, number } = context.issue;
+            const author = context.payload.pull_request.user.login;
+
+            // Allow the repo owner to merge their own PRs
+            if (author === context.payload.repository.owner.login) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: number,
+                body: "Auto-close skipped — you're the repo owner. Merge at your discretion."
+              });
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner, repo, issue_number: number,
+              body: "These are my personal dotfiles. PRs are not accepted here. Please fork the repo instead."
+            });
+            await github.rest.pulls.update({
+              owner, repo, pull_number: number,
+              state: "closed"
+            });

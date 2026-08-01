@@ -1,0 +1,12 @@
+# chezmoi source state — don't track the working copy
+/.chezmoi/
+*.chezmoi
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Secrets
+.infisical.json
+*.env
+*.env.bak.*
