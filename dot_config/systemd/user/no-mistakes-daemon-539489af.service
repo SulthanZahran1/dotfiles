@@ -1,0 +1,16 @@
+[Unit]
+Description=no-mistakes background daemon
+
+[Service]
+Type=simple
+ExecStart=/home/zahranm/.no-mistakes/bin/no-mistakes daemon run --root /home/zahranm/.no-mistakes
+WorkingDirectory=/home/zahranm/.no-mistakes
+Environment="HOME=/home/zahranm"
+Environment="PATH=/home/zahranm/.local/bin:/home/zahranm/go/bin:/home/zahranm/.cargo/bin:/home/zahranm/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+StandardOutput=append:/home/zahranm/.no-mistakes/logs/daemon-bootstrap.log
+StandardError=append:/home/zahranm/.no-mistakes/logs/daemon-bootstrap.log
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target

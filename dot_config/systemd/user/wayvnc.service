@@ -1,0 +1,13 @@
+[Unit]
+Description=WayVNC Server
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wayvnc -d -a -r -g -f 30 172.18.0.1 5900
+Environment="WAYLAND_DISPLAY=wayland-0"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+Restart=on-abnormal
+
+[Install]
+WantedBy=default.target

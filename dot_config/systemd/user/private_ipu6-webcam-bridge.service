@@ -1,0 +1,13 @@
+[Unit]
+Description=IPU6 Webcam Bridge (icamerasrc to v4l2loopback)
+After=pipewire.service wireplumber.service
+Wants=v4l2loopback.service
+
+[Service]
+Type=simple
+ExecStart=/home/zahranm/.local/bin/ipu6-webcam-bridge.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

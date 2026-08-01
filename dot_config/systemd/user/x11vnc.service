@@ -1,0 +1,11 @@
+[Unit]
+Description=x11vnc server for current X11 session
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -forever -shared -rfbauth %h/.config/x11vnc/passwd -rfbport 5900 -display :0 -noxdamage -noxfixes -noxrecord -xkb -ncache 10 -ncache_cr -listen 172.18.0.1
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
