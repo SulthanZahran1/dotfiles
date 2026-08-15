@@ -1,4 +1,5 @@
 anydesk-bin
+debtap
 freerdp2
 google-chrome
 guacamole-client-bin
@@ -11,3 +12,4 @@ larksuite-bin
 libtelnet
 rtk-bin
 v4l2-relayd
+vscodium-bin

@@ -9,3 +9,14 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 export HERMES_YOLO_MODE=1
+. "$HOME/.cargo/env"
+
+# Browser Use: default to the dedicated visible Chrome/CDP profile.
+export BU_CDP_URL="${BU_CDP_URL:-http://127.0.0.1:9223}"
+alias browser-use='env -u PYTHONPATH "$HOME/.local/share/uv/tools/browser-use/bin/browser-use"'
+alias browser-harness='env -u PYTHONPATH "$HOME/.local/share/uv/tools/browser-use/bin/browser-harness"'
+
+# OMP shortcut: pi
+pi() {
+    command omp "$@"
+}

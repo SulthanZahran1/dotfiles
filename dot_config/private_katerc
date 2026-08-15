@@ -8,6 +8,9 @@ Show Status Bar=true
 Show Tab Bar=true
 Show Url Nav Bar=true
 
+[MainWindow]
+1920x1200 screen: Window-Maximized=true
+
 [filetree]
 editShade=30,78,103
 listMode=false

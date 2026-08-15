@@ -8,7 +8,7 @@ StartLimitIntervalSec=0
 Type=simple
 ExecStart=/home/zahranm/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main gateway run
 WorkingDirectory=/home/zahranm/.hermes
-Environment="PATH=/home/zahranm/.hermes/hermes-agent/venv/bin:/home/zahranm/.hermes/hermes-agent/node_modules/.bin:/home/zahranm/.hermes/node/bin:/home/zahranm/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="PATH=/home/zahranm/.hermes/hermes-agent/venv/bin:/home/zahranm/.hermes/hermes-agent/node_modules/.bin:/home/zahranm/.hermes/node/bin:/home/zahranm/.hermes/node:/home/zahranm/.local/bin:/home/zahranm/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 Environment="VIRTUAL_ENV=/home/zahranm/.hermes/hermes-agent/venv"
 Environment="HERMES_HOME=/home/zahranm/.hermes"
 Restart=always

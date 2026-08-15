@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SOURCE_DIR="${CHEZMOI_SOURCE_DIR:-$HOME/.local/share/chezmoi}"
+LOCK_ROOT="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}/chezmoi-sync"
+LOCK_FILE="$LOCK_ROOT/lock"
+
+mkdir -p "$LOCK_ROOT"
+chmod 700 "$LOCK_ROOT"
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+    echo "chezmoi sync already running; exiting"
+    exit 0
+fi
+
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin"
+
+if [[ ! -d "$SOURCE_DIR/.git" ]]; then
+    echo "chezmoi source is not a Git repository: $SOURCE_DIR" >&2
+    exit 1
+fi
+
+cd "$SOURCE_DIR"
+
+# Re-add managed files from the live home directory. GitHub CLI stores its
+# OAuth token in hosts.yml; keep that credential out of the source repository.
+while IFS= read -r -d '' target; do
+    case "$target" in
+        "$HOME/.config/gh/hosts.yml")
+            continue
+            ;;
+    esac
+    chezmoi re-add "$target"
+done < <(chezmoi managed --include=files --path-style=absolute --nul-path-separator)
+
+# Package lists are snapshots of the current machine, not hand-maintained manifests.
+pacman -Qqe > scripts/pkglist.txt
+yay -Qqm > scripts/aurlist.txt
+
+git add --all
+if ! git diff --cached --quiet; then
+    git commit -m "chore: daily dotfiles sync $(date +%F)"
+else
+    echo "No dotfile changes to commit"
+fi
+
+git push origin HEAD

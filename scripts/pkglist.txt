@@ -58,6 +58,7 @@ cpupower
 cryptsetup
 cups
 darktable
+debtap
 device-mapper
 diffutils
 dmidecode
@@ -151,6 +152,7 @@ logrotate
 lsb-release
 lsscsi
 lvm2
+magic-wormhole
 man-db
 man-pages
 mdadm
@@ -240,6 +242,7 @@ v4l2loopback-dkms
 vim
 vlc-plugins-all
 vpl-gpu-rt
+vscodium-bin
 vulkan-intel
 wayvnc
 wget
@@ -248,11 +251,15 @@ wireplumber
 wl-clipboard
 wpa_supplicant
 x11vnc
+xclip
 xdg-user-dirs
+xdotool
 xfsprogs
 xl2tpd
 xorg-server
 xorg-xauth
 xorg-xhost
+xsel
 xsettingsd
 yay
+zellij

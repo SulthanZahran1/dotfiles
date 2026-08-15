@@ -3,3 +3,9 @@
 	name = Sulthan Zahran
 [safe]
 	directory = /tmp/claude-1000/-home-zahranm--treehouse-bella-enterprise-03bcfb-2-bella-enterprise/b8fb8397-a439-469c-9cc2-2c660540337c/scratchpad/rt/demo
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

@@ -4,7 +4,7 @@ After=pipewire.service wireplumber.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/zahranm/.local/bin/ipu6-webcam-daemon.py
+ExecStart=/usr/bin/python3 %h/.local/bin/ipu6-webcam-daemon.py
 Restart=on-failure
 RestartSec=3
 
