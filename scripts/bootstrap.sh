@@ -122,12 +122,14 @@ done
 # 7. Enable systemd services (user)
 # ---------------------------------------------------------------------------
 echo "[7/9] Enabling systemd user services..."
+loginctl enable-linger "$USER" 2>/dev/null || echo "  (could not enable user lingering)"
 USER_SERVICES=(
   "hermes-gateway"
   "ipu6-webcam-daemon"
   "no-mistakes-daemon-539489af"
   "wireplumber"
   "xdg-user-dirs"
+  "chezmoi-sync.timer"
 )
 for svc in "${USER_SERVICES[@]}"; do
   systemctl --user enable --now "$svc" 2>/dev/null || echo "  (could not enable $svc)"
