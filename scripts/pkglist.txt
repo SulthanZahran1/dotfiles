@@ -264,3 +264,4 @@ xsel
 xsettingsd
 yay
 zellij
+zoom

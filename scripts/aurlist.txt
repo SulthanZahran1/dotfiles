@@ -13,3 +13,4 @@ libtelnet
 rtk-bin
 v4l2-relayd
 vscodium-bin
+zoom
