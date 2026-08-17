@@ -116,6 +116,7 @@ jdk17-openjdk
 jfsutils
 kate
 kcalc
+kclock
 kde-gtk-config
 kdeconnect
 kdegraphics-thumbnailers
