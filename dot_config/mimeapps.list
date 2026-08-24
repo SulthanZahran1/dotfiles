@@ -7,3 +7,4 @@ text/html=google-chrome.desktop
 x-scheme-handler/hermes=Hermes.desktop
 x-scheme-handler/dslinker9=dslinuxlinker.desktop
 x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/zcode=zcode.desktop

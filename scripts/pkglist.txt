@@ -263,5 +263,6 @@ xorg-xhost
 xsel
 xsettingsd
 yay
+zcode
 zellij
 zoom
