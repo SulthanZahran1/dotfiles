@@ -55,6 +55,7 @@ cockpit
 cockpit-machines
 cpu-x
 cpupower
+cronie
 cryptsetup
 cups
 darktable
