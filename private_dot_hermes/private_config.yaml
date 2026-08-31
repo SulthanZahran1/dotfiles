@@ -1,6 +1,7 @@
 model:
-  default: deepseek-v4-flash:cloud
-  provider: ollama-cloud
+  default: gpt-5.6-luna
+  provider: openai-codex
+  base_url: https://chatgpt.com/backend-api/codex
 fallback_providers:
   - provider: ollama-cloud
     model: deepseek-v4-flash
@@ -59,10 +60,10 @@ terminal:
   docker_mount_cwd_to_workspace: false
   lifetime_seconds: 300
 browser:
+  backend: browser-use
   inactivity_timeout: 120
   cloud_provider: local
   use_gateway: false
-  backend: browser-use
 tool_loop_guardrails:
   warnings_enabled: true
   hard_stop_enabled: false
@@ -91,11 +92,16 @@ compression:
   idle_compact_after_seconds: 0
 prompt_caching:
   cache_ttl: 5m
+auxiliary:
+  vision:
+    provider: openrouter
+    model: google/gemini-3.7-flash
 display:
   compact: false
   busy_input_mode: interrupt
   bell_on_complete: false
   show_reasoning: false
+  background_process_notifications: all
   streaming: true
   skin: default
   interim_assistant_messages: true
@@ -103,7 +109,6 @@ display:
   cleanup_progress: false
   long_running_notifications: true
   busy_ack_detail: true
-  background_process_notifications: all
 stt:
   enabled: true
   local:
@@ -221,7 +226,3 @@ plugins:
   entries:
     infisical:
       allow_tool_override: false
-auxiliary:
-  vision:
-    provider: openrouter
-    model: google/gemini-3.7-flash
