@@ -19,8 +19,8 @@ immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][23][Applets][24][Configuration]
-popupHeight=653
-popupWidth=791
+popupHeight=657
+popupWidth=795
 
 [Containments][23][Applets][24][Configuration][ConfigDialog]
 DialogHeight=540
@@ -56,8 +56,8 @@ immutability=1
 lastScreen=0
 location=4
 plugin=org.kde.plasma.systemtray
-popupHeight=564
-popupWidth=564
+popupHeight=572
+popupWidth=572
 wallpaperplugin=org.kde.image
 
 [Containments][23][Applets][28][Applets][29]
